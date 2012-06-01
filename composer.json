@@ -1,0 +1,28 @@
+{
+    "name": "optionable/optionable",
+    "type": "library",
+    "description": "OptionAble is an extension to Pimple Dependency Injection Container. It handles default values.",
+    "keywords": ["dependency injection", "container", "default value"],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+          "name":   "Zsolt Javorszky",
+          "email":  "zsolt.javorszky@gmail.com"
+        },
+        {
+          "name":   "Imre Toth",
+          "email":  "tothimre@gmail.com"
+        }
+    ],
+    "require": {
+        "php":                  ">=5.3.0",
+        "pimple/pimple":        "dev-master"
+    },
+    "require-dev": {
+        "EHER/PHPUnit":             "1.6",
+        "fabpot/php-cs-fixer":      "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "OptionAble": "src/" }
+    }
+}
