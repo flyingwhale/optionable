@@ -17,11 +17,11 @@
  * limitations under the License.
  */
 
-namespace OptionAble\Tests;
+namespace Optionable\Tests;
 
-use OptionAble;
+use Optionable;
 
-class OptionAbleTest extends \PHPUnit_Framework_TestCase
+class OptionableTest extends \PHPUnit_Framework_TestCase
 {
     
    /**
@@ -30,13 +30,13 @@ class OptionAbleTest extends \PHPUnit_Framework_TestCase
     */    
     public function testWithoutDefault()
     {
-       $optionAble =  new OptionAble();
+       $optionAble =  new Optionable();
        $optionAble->getOption('foo');
     }
 
     public function testSetterWithString()
     {
-        $optionAble =  new OptionAble();
+        $optionAble =  new Optionable();
         $id = 'param';
         $value = 'value';
         $optionAble->setDefaultOption($id, $value);
@@ -46,7 +46,7 @@ class OptionAbleTest extends \PHPUnit_Framework_TestCase
 
     public function testSetterWithClosure()
     {
-        $optionAble =  new OptionAble();
+        $optionAble =  new Optionable();
         $id = 'func';
         $value = function () {
             return 'value';
@@ -60,7 +60,7 @@ class OptionAbleTest extends \PHPUnit_Framework_TestCase
     
     public function testSetterOverride()
     {
-        $optionAble =  new OptionAble();
+        $optionAble =  new Optionable();
         $id = 'param';
         $defaultOptionValue = 'This is a String.';
         $optionValue = 'This is an overrided String.';
@@ -75,7 +75,7 @@ class OptionAbleTest extends \PHPUnit_Framework_TestCase
     
     public function testConstructorWithString()
     {
-        $optionAble =  new ExtOptionAble();
+        $optionAble =  new ExtOptionable();
         $id = 'param';
         $expectedValue = 'This is a String.';
         
@@ -86,7 +86,7 @@ class OptionAbleTest extends \PHPUnit_Framework_TestCase
 
     public function testConstructorWithClosure()
     {
-        $optionAble =  new ExtOptionAble();
+        $optionAble =  new ExtOptionable();
         $id = 'closure';
         $expectedValue = 'This is a closure.';
         
@@ -97,7 +97,7 @@ class OptionAbleTest extends \PHPUnit_Framework_TestCase
    
     public function testConstructorOverride()
     {
-        $optionAble =  new ExtOptionAble();
+        $optionAble =  new ExtOptionable();
         $id = 'param';
         $expectedValue = 'This is an overrided String.';
         

@@ -12,8 +12,8 @@
          bootstrap="tests/bootstrap.php"
 >
     <testsuites>
-        <testsuite name="OptionAble Test Suite">
-            <directory>./tests/OptionAble/</directory>
+        <testsuite name="Optionable Test Suite">
+            <directory>./tests/Optionable/</directory>
         </testsuite>
     </testsuites>
     

@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-class OptionAble extends Pimple
+class Optionable extends Pimple
 {
     protected $defaultValues;
     

@@ -17,5 +17,5 @@
  * limitations under the License.
  */
 
-require_once __DIR__.'/../src/OptionAble.php';
-require_once __DIR__.'/OptionAble/Tests/ExtOptionAble.php';
+require_once __DIR__.'/../src/Optionable.php';
+require_once __DIR__.'/Optionable/Tests/ExtOptionable.php';

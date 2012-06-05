@@ -17,11 +17,11 @@
  * limitations under the License.
  */
 
-namespace OptionAble\Tests;
+namespace Optionable\Tests;
 
-use OptionAble;
+use Optionable;
 
-class ExtOptionAble extends OptionAble
+class ExtOptionable extends Optionable
 {
     protected function setupDefaultOptions()
     {

@@ -1,7 +1,7 @@
 {
     "name": "optionable/optionable",
     "type": "library",
-    "description": "OptionAble is an extension to Pimple Dependency Injection Container. It handles default values.",
+    "description": "Optionable is an extension to Pimple Dependency Injection Container. It handles default values.",
     "keywords": ["dependency injection", "container", "default value"],
     "license": "Apache-2.0",
     "authors": [
@@ -23,6 +23,6 @@
         "fabpot/php-cs-fixer":      "dev-master"
     },
     "autoload": {
-        "psr-0": { "OptionAble": "src/" }
+        "psr-0": { "Optionable": "src/" }
     }
 }
