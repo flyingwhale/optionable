@@ -19,52 +19,10 @@
 
 class Optionable extends Pimple
 {
-    protected $defaultValues;
-    
-    public function __construct($options = array())
-    {
-        parent::__construct($options);
-        $this->defaultValues = array();
-        $this->setupDefaultOptions();
-    }
-
-    public function getDefaultOption($id)
-    {
-        if (!array_key_exists($id, $this->defaultValues)) {
-            throw new InvalidArgumentException(sprintf('Identifier "%s" is not defined.', $id));
-        }
-
-        return $this->defaultValues[$id] instanceof Closure ? $this->defaultValues[$id]($this) : $this->defaultValues[$id];
-    
-    }
-    
-    public function getOption($id)
-    {
-        $option = false;
-        try
-        {
-            $option = $this->offsetGet($id);
-        }
-        catch (InvalidArgumentException $e)
-        {
-            $option = $this->getDefaultOption($id);
-        }
-
-        return $option;
-    }
-
     public function setDefaultOption($id, $value)
     {
-        $this->defaultValues[$id] = $value;
+        if(!$this->offsetExists($id)){
+            $this[$id] = $value;
+        }
     }
-    
-    public function setOption($id, $value)
-    {
-        $this->offsetSet($id, $value);
-    }
-
-    protected function setupDefaultOptions()
-    {
-    }
-    
 }

@@ -23,8 +23,9 @@ use Optionable;
 
 class ExtOptionable extends Optionable
 {
-    protected function setupDefaultOptions()
+    public function __construct(array $options = array())
     {
+        parent::__construct($options);
         $this->setDefaultOption('param', 'This is a String.');
         $this->setDefaultOption('closure', function () {
             return 'This is a closure.';

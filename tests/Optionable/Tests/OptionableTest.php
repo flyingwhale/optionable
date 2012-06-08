@@ -31,7 +31,7 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
     public function testWithoutDefault()
     {
        $optionAble =  new Optionable();
-       $optionAble->getOption('foo');
+       $optionAble['foo'];
     }
 
     public function testSetterWithString()
@@ -40,8 +40,7 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
         $id = 'param';
         $value = 'value';
         $optionAble->setDefaultOption($id, $value);
-        $this->assertEquals($value, $optionAble->getDefaultOption($id));
-        $this->assertEquals($value, $optionAble->getOption($id));
+        $this->assertEquals($value, $optionAble[$id]);
     }
 
     public function testSetterWithClosure()
@@ -54,22 +53,20 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
         $expectedValue = 'value';
         
         $optionAble->setDefaultOption($id, $value);
-        $this->assertEquals($expectedValue, $optionAble->getDefaultOption($id));
-        $this->assertEquals($expectedValue, $optionAble->getOption($id));
+        $this->assertEquals($expectedValue, $optionAble[$id]);
     }
     
-    public function testSetterOverride()
+    public function testSetterOverwrite()
     {
         $optionAble =  new Optionable();
         $id = 'param';
         $defaultOptionValue = 'This is a String.';
-        $optionValue = 'This is an overrided String.';
+        $optionValue = 'This is a string to overwrite.';
         
         $optionAble->setDefaultOption($id, $defaultOptionValue);
-        $optionAble->setOption($id, $optionValue);
+        $optionAble[$id] = $optionValue;
         
-        $this->assertEquals($defaultOptionValue, $optionAble->getDefaultOption($id));
-        $this->assertEquals($optionValue, $optionAble->getOption($id));
+        $this->assertEquals($optionValue, $optionAble[$id]);
         
     }
     
@@ -79,8 +76,7 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
         $id = 'param';
         $expectedValue = 'This is a String.';
         
-        $this->assertEquals($expectedValue, $optionAble->getDefaultOption($id));
-        $this->assertEquals($expectedValue, $optionAble->getOption($id));
+        $this->assertEquals($expectedValue, $optionAble[$id]);
         
     }
 
@@ -90,8 +86,7 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
         $id = 'closure';
         $expectedValue = 'This is a closure.';
         
-        $this->assertEquals($expectedValue, $optionAble->getDefaultOption($id));
-        $this->assertEquals($expectedValue, $optionAble->getOption($id));
+        $this->assertEquals($expectedValue, $optionAble[$id]);
         
     }
    
@@ -102,10 +97,9 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
         $expectedValue = 'This is an overrided String.';
         
         
-        $optionAble->setOption($id, $expectedValue);
+        $optionAble[$id] = $expectedValue;
         
-        $this->assertEquals('This is a String.', $optionAble->getDefaultOption($id));
-        $this->assertEquals($expectedValue, $optionAble->getOption($id));
+        $this->assertEquals($expectedValue, $optionAble[$id]);
         
     }
     
