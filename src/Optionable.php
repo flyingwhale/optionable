@@ -19,10 +19,33 @@
 
 class Optionable extends Pimple
 {
+
+    public static function getOptionable($options, $class='Optionable')
+    {
+        if ($options InstanceOf Optionable) {
+            return $options;
+        }
+
+        if (is_array($options)) {
+        return new $class($options);
+        }
+
+        throwException(new InvalidArgumentException('The $options parameter must be an array or an Optionable class'));
+
+    }
+
     public function setDefaultOption($id, $value)
     {
-        if(!$this->offsetExists($id)){
+        if (!$this->offsetExists($id)) {
             $this[$id] = $value;
         }
     }
+
+    public function setDefaultOptions(array $options)
+    {
+        foreach ($options as $key => $value) {
+            $this->setDefaultOption($key, $value);
+        }
+    }
+
 }

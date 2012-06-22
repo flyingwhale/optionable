@@ -23,11 +23,11 @@ use Optionable;
 
 class OptionableTest extends \PHPUnit_Framework_TestCase
 {
-    
+
    /**
     * @expectedException InvalidArgumentException
     * @expectedExceptionMessage Identifier "foo" is not defined.
-    */    
+    */
     public function testWithoutDefault()
     {
        $optionAble =  new Optionable();
@@ -51,33 +51,33 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
             return 'value';
         };
         $expectedValue = 'value';
-        
+
         $optionAble->setDefaultOption($id, $value);
         $this->assertEquals($expectedValue, $optionAble[$id]);
     }
-    
+
     public function testSetterOverwrite()
     {
         $optionAble =  new Optionable();
         $id = 'param';
         $defaultOptionValue = 'This is a String.';
         $optionValue = 'This is a string to overwrite.';
-        
+
         $optionAble->setDefaultOption($id, $defaultOptionValue);
         $optionAble[$id] = $optionValue;
-        
+
         $this->assertEquals($optionValue, $optionAble[$id]);
-        
+
     }
-    
+
     public function testConstructorWithString()
     {
         $optionAble =  new ExtOptionable();
         $id = 'param';
         $expectedValue = 'This is a String.';
-        
+
         $this->assertEquals($expectedValue, $optionAble[$id]);
-        
+
     }
 
     public function testConstructorWithClosure()
@@ -85,22 +85,50 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
         $optionAble =  new ExtOptionable();
         $id = 'closure';
         $expectedValue = 'This is a closure.';
-        
+
         $this->assertEquals($expectedValue, $optionAble[$id]);
-        
+
     }
-   
+
     public function testConstructorOverride()
     {
         $optionAble =  new ExtOptionable();
         $id = 'param';
         $expectedValue = 'This is an overrided String.';
-        
-        
+
         $optionAble[$id] = $expectedValue;
-        
+
         $this->assertEquals($expectedValue, $optionAble[$id]);
-        
     }
-    
+
+    public function testSetDefaultOptions()
+    {
+        $options['first'] =  'first';
+        $options['second'] = 'second';
+
+        $optionable = new Optionable();
+        $optionable->setDefaultOptions($options);
+
+        $this->assertEquals('first', $optionable['first']);
+        $this->assertEquals('second', $optionable['second']);
+    }
+
+    public function testGetOptionable()
+    {
+        $options = array('first' => 'firstv', 'second' => 'secondv');
+        $optionableAsParam = new Optionable($options);
+
+        $optionable  = Optionable::getOptionable($options);
+
+        $this->assertEquals('Optionable',get_class($optionable));
+        $this->assertEquals('firstv', $optionable['first']);
+        $this->assertEquals('secondv', $optionable['second']);
+
+        $optionable  = Optionable::getOptionable($optionableAsParam);
+
+        $this->assertEquals('Optionable',get_class($optionable));
+        $this->assertEquals('firstv', $optionable['first']);
+        $this->assertEquals('secondv', $optionable['second']);
+    }
+
 }

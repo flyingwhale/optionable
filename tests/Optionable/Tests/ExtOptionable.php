@@ -30,7 +30,7 @@ class ExtOptionable extends Optionable
         $this->setDefaultOption('closure', function () {
             return 'This is a closure.';
         });
-        
+
     }
 
 }
