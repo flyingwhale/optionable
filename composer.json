@@ -24,5 +24,6 @@
     },
     "autoload": {
         "psr-0": { "Optionable": "src/" }
-    }
+    },
+    "minimum-stability": "dev"
 }
