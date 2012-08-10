@@ -48,29 +48,22 @@ class Optionable extends Pimple
         }
     }
 
-    public function getArrayStructure($name, $class = '\Optionable')
+    public function pullArray($name)
     {
-        if ($name == '')
-        {
-            return $this;
-        }
-        
         $keys = $this->keys();
-        $variables = array();
+        $pulledArray = array();
         $pattern = sprintf('/(^%1$s[.])/', preg_quote($name, "/"));
 
         foreach($this->keys() as $key)
-        {
-            if (preg_match($pattern, $key))
-            {
-                $newKey = preg_replace($pattern, '', $key);
-                $variables[$newKey] = $this->raw($key);
-            }
-            
-        }
-        
-        $optionable = new $class($variables);
+         {
+             if (preg_match($pattern, $key) || empty($name))
+             {
+                 $newKey = preg_replace($pattern, '', $key);
+                 $pulledArray[$newKey] = $this[$key];
+             }
 
-        return $optionable;
+         }
+
+         return $pulledArray;
     }
 }

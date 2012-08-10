@@ -26,12 +26,12 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
     
     
     /**
-    * @dataProvider providerGetArrayStructure
+    * @dataProvider providerpullArray
     */
-    public function testGetArrayStructure($key, $srcOptionable, $expectedOptionable)
+    public function testPullArray($key, $srcOptionable, $expectedArray)
     {
-       $optionable = $srcOptionable->getArrayStructure($key);
-       $this->assertEquals($expectedOptionable, $optionable);
+       $pulledArray = $srcOptionable->pullArray($key);
+       $this->assertEquals($expectedArray, $pulledArray);
     }
     
     
@@ -142,61 +142,66 @@ class OptionableTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('secondv', $optionable['second']);
     }
 
-    public function providerGetArrayStructure()
+    public function providerPullArray()
     {
-       $data = array();
+        $data = array();
        
-       $key = '';
-       
-       $srcOptionable =  new Optionable();
-       $srcOptionable['1'] = 'v1';
-       $srcOptionable['11'] = 'v11';
-       $srcOptionable['1.1'] = 'v1.1';
-       $srcOptionable['1.2'] = 'v1.2';
-       $srcOptionable['1.2.1'] = 'v1.2.1';
-       $srcOptionable['1.2.2'] = 'v1.2.2';
-       $srcOptionable['1.2.3.4.5'] = 'v1.2.3.4.5';
-       $srcOptionable['1.2.1.1'] = 'v1.2.1.1';
-       $srcOptionable['1.2.c'] = function(){return 'v1.2.c';};
-       $srcOptionable['1.22'] = 'v1.22';
-       $srcOptionable['2'] = 'v2';
-       
-       $expectedOptionable =  new Optionable();
-       $expectedOptionable['1'] = 'v1';
-       $expectedOptionable['11'] = 'v11';
-       $expectedOptionable['1.1'] = 'v1.1';
-       $expectedOptionable['1.2'] = 'v1.2';
-       $expectedOptionable['1.2.1'] = 'v1.2.1';
-       $expectedOptionable['1.2.2'] = 'v1.2.2';
-       $expectedOptionable['1.2.3.4.5'] = 'v1.2.3.4.5';
-       $expectedOptionable['1.2.1.1'] = 'v1.2.1.1';
-       $expectedOptionable['1.2.c'] = function(){return 'v1.2.c';};
-       $expectedOptionable['1.22'] = 'v1.22';
-       $expectedOptionable['2'] = 'v2';
+        $key = '';
 
-       $data[] = array($key, $srcOptionable, $expectedOptionable);
+        $srcOptionable =  new Optionable();
+        $srcOptionable['1'] = 'v1';
+        $srcOptionable['11'] = 'v11';
+        $srcOptionable['1.1'] = 'v1.1';
+        $srcOptionable['1.2'] = 'v1.2';
+        $srcOptionable['1.2.1'] = 'v1.2.1';
+        $srcOptionable['1.2.2'] = 'v1.2.2';
+        $srcOptionable['1.2.3.4.5'] = 'v1.2.3.4.5';
+        $srcOptionable['1.2.1.1'] = 'v1.2.1.1';
+        $srcOptionable['1.2.c'] = function(){return 'v1.2.c';};
+        $srcOptionable['1.22'] = 'v1.22';
+        $srcOptionable['2'] = 'v2';
        
-       $key = '1';
-       $expectedOptionable =  new Optionable();
-       $expectedOptionable['1'] = 'v1.1';
-       $expectedOptionable['2'] = 'v1.2';
-       $expectedOptionable['2.1'] = 'v1.2.1';
-       $expectedOptionable['2.2'] = 'v1.2.2';
-       $expectedOptionable['2.3.4.5'] = 'v1.2.3.4.5';
-       $expectedOptionable['2.1.1'] = 'v1.2.1.1';
-       $expectedOptionable['2.c'] = function(){return 'v1.2.c';};
-       $expectedOptionable['22'] = 'v1.22';
-       $data[] = array($key, $srcOptionable, $expectedOptionable);
+        $expectedArray = array(
+            '1' => 'v1',
+            '11' => 'v11',
+            '1.1' => 'v1.1',
+            '1.2' => 'v1.2',
+            '1.2.1' => 'v1.2.1',
+            '1.2.2' => 'v1.2.2',
+            '1.2.3.4.5' => 'v1.2.3.4.5',
+            '1.2.1.1' => 'v1.2.1.1',
+            '1.2.c' => 'v1.2.c',
+            '1.22' => 'v1.22',
+            '2' => 'v2'
+        );
 
-       $key = '1.2';
-       $expectedOptionable =  new Optionable();
-       $expectedOptionable['1'] = 'v1.2.1';
-       $expectedOptionable['2'] = 'v1.2.2';
-       $expectedOptionable['3.4.5'] = 'v1.2.3.4.5';
-       $expectedOptionable['1.1'] = 'v1.2.1.1';
-       $expectedOptionable['c'] = function(){return 'v1.2.c';};
-       $data[] = array($key, $srcOptionable, $expectedOptionable);
+        $data[] = array($key, $srcOptionable, $expectedArray);
+
+        $key = '1';
+        $expectedArray = array(
+            '1' => 'v1.1',
+            '2' => 'v1.2',
+            '2.1' => 'v1.2.1',
+            '2.2' => 'v1.2.2',
+            '2.3.4.5' => 'v1.2.3.4.5',
+            '2.1.1' => 'v1.2.1.1',
+            '2.c' => 'v1.2.c',
+            '22' => 'v1.22',
+        );
+        
+        $data[] = array($key, $srcOptionable, $expectedArray);
+
+        $key = '1.2';
+        $expectedArray = array(
+            '1' => 'v1.2.1',
+            '2' => 'v1.2.2',
+            '3.4.5' => 'v1.2.3.4.5',
+            '1.1' => 'v1.2.1.1',
+            'c' => 'v1.2.c'
+        );
+        
+        $data[] = array($key, $srcOptionable, $expectedArray);
        
-       return $data;
+        return $data;
     }
 }
