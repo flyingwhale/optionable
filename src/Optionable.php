@@ -30,7 +30,7 @@ class Optionable extends Pimple
         return new $class($options);
         }
 
-        throwException(new InvalidArgumentException('The $options parameter must be an array or an Optionable class'));
+        throw new Exception(new InvalidArgumentException('The $options parameter must be an array or an Optionable class'));
 
     }
 
