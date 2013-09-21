@@ -1,5 +1,5 @@
 {
-    "name": "optionable/optionable",
+    "name": "flyingwhale/optionable",
     "type": "library",
     "description": "Optionable is an extension to Pimple Dependency Injection Container. It handles default values.",
     "keywords": ["dependency injection", "container", "default value"],
