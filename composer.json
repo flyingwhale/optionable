@@ -25,5 +25,6 @@
     "autoload": {
         "psr-0": { "Optionable": "src/" }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "process-timeout": "3600"
 }
