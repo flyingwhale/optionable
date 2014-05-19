@@ -19,12 +19,10 @@
         "pimple/pimple":        "1.*"
     },
     "require-dev": {
-        "EHER/PHPUnit":             "1.6",
-        "fabpot/php-cs-fixer":      "dev-master"
+	"phpunit/phpunit": "4.1.0"
     },
     "autoload": {
         "psr-0": { "Optionable": "src/" }
     },
-    "minimum-stability": "dev",
     "process-timeout": "3600"
 }
